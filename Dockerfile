@@ -1,7 +1,7 @@
 FROM i386/ubuntu:19.10
 
 RUN apt-get update \
-    && apt-get install -y git net-tools vim nginx rsyslog supervisor php5-fpm php5-cli apache2-utils\
+    && apt-get install -y git net-tools vim nginx rsyslog supervisor php7.3-fpm php7.3-cli apache2-utils\
     && rm -rf /var/lib/apt/lists/*
 
 RUN sed -i -e 's/listen\ =\ 127.0.0.1:9000/listen\ =\ \/var\/run\/php5-fpm.sock/' /etc/php5/fpm/pool.d/www.conf
