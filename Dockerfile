@@ -1,17 +1,21 @@
 FROM i386/ubuntu:19.04
 
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
+
+ENV TZ=Australia/Sydney
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get update \
     && apt-get install -y git net-tools vim nginx rsyslog supervisor php7.2-fpm php7.2-cli apache2-utils\
     && rm -rf /var/lib/apt/lists/*
 
-RUN sed -i -e 's/listen\ =\ 127.0.0.1:9000/listen\ =\ \/var\/run\/php7.2-fpm.sock/' /etc/php7.2/fpm/pool.d/www.conf
+RUN sed -i -e 's/listen\ =\ 127.0.0.1:9000/listen\ =\ \/var\/run\/php7.2-fpm.sock/' /etc/php/7.2/fpm/pool.d/www.conf
 RUN sed -i '1idaemon off;' /etc/nginx/nginx.conf
 
 RUN rm -rf /var/www && git clone https://github.com/potsky/PimpMyLog.git /var/www
-RUN sed -i -e 's/;daemonize\ =\ yes/daemonize\ =\ no/' /etc/php7.2/fpm/php-fpm.conf
-RUN sed -i 's/^variables_order\ =.*/variables_order\ =\ \"GPCSE\"'/ /etc/php7.2/cli/php.ini
+RUN sed -i -e 's/;daemonize\ =\ yes/daemonize\ =\ no/' /etc/php/7.2/fpm/php-fpm.conf
+RUN sed -i 's/^variables_order\ =.*/variables_order\ =\ \"GPCSE\"'/ /etc/php/7.2/cli/php.ini
 
 RUN sed -i -e 's/#$ModLoad\ imudp/$ModLoad\ imudp/' -e 's/#$UDPServerRun\ 514/$UDPServerRun\ 514/' /etc/rsyslog.conf
 RUN sed -i -e 's/$ActionFileDefaultTemplate\ RSYSLOG_TraditionalFileFormat/$ActionFileDefaultTemplate\ RSYSLOG_SyslogProtocol23Format/' /etc/rsyslog.conf
