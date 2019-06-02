@@ -30,6 +30,7 @@ COPY config.user.php /var/www/
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 COPY run.sh /
+RUN chmod u+x run.sh
 
 #RUN cd /var/www && php7.2 -f ./create-user.php && chown www-data:www-data config.auth.user.php 
 
