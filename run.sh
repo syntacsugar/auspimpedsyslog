@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [ -z $SYSLOG_USERNAME ];then
     export SYSLOG_USERNAME=admin
 fi
@@ -13,5 +14,5 @@ php7.2 -f create-user.php
 chown www-data:www-data config.auth.user.php
 rm -f create-user.php
 cd
-sleep 120
+service php7.2-fpm start
 service supervisor start
