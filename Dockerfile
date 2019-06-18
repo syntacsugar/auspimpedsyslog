@@ -11,10 +11,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 #RUN sed -i -e 's/listen\ =\ 127.0.0.1:9000/listen\ =\ \/var\/run\/php7.2-fpm.sock/' /etc/php/7.2/fpm/pool.d/www.conf
-RUN sed -i '1idaemon off;' /etc/nginx/nginx.conf
+#RUN sed -i '1idaemon off;' /etc/nginx/nginx.conf
 
 RUN rm -rf /var/www && git clone https://github.com/potsky/PimpMyLog.git /var/www
 RUN sed -i -e 's/;daemonize\ =\ yes/daemonize\ =\ no/' /etc/php/7.2/fpm/php-fpm.conf
+#RUN mv  /etc/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 #RUN sed -i 's/^variables_order\ =.*/variables_order\ =\ \"GPCSE\"'/ /etc/php/7.2/cli/php.ini
 RUN sed -i 's/variables_order\ =\ "GPCS"/variables_order\ =\ \"GPCSE\"'/ /etc/php/7.2/cli/php.ini
 
@@ -27,7 +28,7 @@ RUN mkdir -p /var/log/net/ && touch /var/log/net/syslog.log && ln -s /var/log/ne
 RUN chown -R syslog:adm /var/log/net/
 RUN adduser www-data adm
 
-COPY nginx-default /etc/nginx/sites-enabled/default
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config.user.php /var/www/
 COPY rsyslog.conf /etc/rsyslog.conf
@@ -37,6 +38,7 @@ RUN chmod u+x run.sh
 
 #RUN cd /var/www && php7.2 -f ./create-user.php && chown www-data:www-data config.auth.user.php 
 
-EXPOSE 80 514/udp
-
+#EXPOSE 80 514/udp
 CMD ["/run.sh"]
+
+CMD ["sleep","999"]

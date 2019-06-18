@@ -1,10 +1,10 @@
 #!/bin/bash
-
+sleep 5
 if [ -z $SYSLOG_USERNAME ];then
     export SYSLOG_USERNAME=admin
 fi
 if [ -z $SYSLOG_PASSWORD ];then
-    export SYSLOG_PASSWORD=SyslogP4ss
+    export SYSLOG_PASSWORD=syspassword
 fi
 
 htpasswd -c -b /etc/nginx/.htpasswd $SYSLOG_USERNAME $SYSLOG_PASSWORD
@@ -14,4 +14,6 @@ php7.2 -f create-user.php
 chown www-data:www-data config.auth.user.php
 rm -f create-user.php
 cd
-supervisord
+sleep 5
+service php7.2-fpm start
+service supervisor start
