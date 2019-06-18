@@ -1,4 +1,4 @@
-FROM i386/ubuntu:19.04
+FROM i386/ubuntu:18.04
 
 
 ENV DEBIAN_FRONTEND=noninteractive
