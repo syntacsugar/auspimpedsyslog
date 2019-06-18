@@ -22,7 +22,7 @@ RUN sed -i 's/variables_order\ =\ "GPCS"/variables_order\ =\ \"GPCSE\"'/ /etc/ph
 #RUN sed -i -e 's/#$ModLoad\ imudp/$ModLoad\ imudp/' -e 's/#$UDPServerRun\ 514/$UDPServerRun\ 514/' /etc/rsyslog.conf
 RUN sed -i -e 's/#module(load="imudp")/module(load="imudp")/' -e 's/#input(type="imudp"\ port="514")/input(type="imudp"\ port="514")/' /etc/rsyslog.conf
 #RUN sed -i -e 's/$ActionFileDefaultTemplate\ RSYSLOG_TraditionalFileFormat/$ActionFileDefaultTemplate\ RSYSLOG_SyslogProtocol23Format/' /etc/rsyslog.conf
-RUN sed -i -e 's/$ActionFileDefaultTemplate\ RSYSLOG_TraditionalFileFormat/ActionFileDefaultTemplate\ RSYSLOG_SyslogProtocol23Format/' /etc/rsyslog.conf
+#RUN sed -i -e 's/$ActionFileDefaultTemplate\ RSYSLOG_TraditionalFileFormat/ActionFileDefaultTemplate\ RSYSLOG_SyslogProtocol23Format/' /etc/rsyslog.conf
 
 RUN mkdir -p /var/log/net/ && touch /var/log/net/syslog.log && ln -s /var/log/net/syslog.log /var/www/
 RUN chown -R syslog:adm /var/log/net/
@@ -38,7 +38,8 @@ RUN chmod u+x run.sh
 
 #RUN cd /var/www && php7.2 -f ./create-user.php && chown www-data:www-data config.auth.user.php 
 
-#EXPOSE 80 514/udp
+EXPOSE 80 514/udp
 CMD ["/run.sh"]
+
 
 CMD ["sleep","999"]
