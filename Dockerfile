@@ -23,7 +23,7 @@ RUN adduser www-data adm
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY config.user.php /var/www/
+COPY config.user.php /var/www/cfg/pimpmylog.config.php
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 COPY run.sh /
