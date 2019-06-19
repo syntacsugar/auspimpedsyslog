@@ -4,7 +4,7 @@ if [ -z $SYSLOG_USERNAME ];then
     export SYSLOG_USERNAME=admin
 fi
 if [ -z $SYSLOG_PASSWORD ];then
-    export SYSLOG_PASSWORD=syspassword
+    export SYSLOG_PASSWORD=password
 fi
 
 htpasswd -c -b /etc/nginx/.htpasswd $SYSLOG_USERNAME $SYSLOG_PASSWORD

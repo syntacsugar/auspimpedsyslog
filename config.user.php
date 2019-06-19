@@ -12,7 +12,7 @@
 {
 	"globals": {
 		"_remove_me_to_set_AUTH_LOG_FILE_COUNT"         : 100,
-		"_remove_me_to_set_AUTO_UPGRADE"                : false,
+		"_remove_me_to_set_AUTO_UPGRADE"                : true,
 		"_remove_me_to_set_CHECK_UPGRADE"               : true,
 		"_remove_me_to_set_EXPORT"                      : true,
 		"_remove_me_to_set_FILE_SELECTOR"               : "bs",
@@ -38,8 +38,8 @@
 		"_remove_me_to_set_TITLE"                       : "Pimp my Log",
 		"_remove_me_to_set_TITLE_FILE"                  : "Pimp my Log [%f]",
 		"_remove_me_to_set_UPGRADE_MANUALLY_URL"        : "http:\/\/pimpmylog.com\/getting-started\/#update",
-		"_remove_me_to_set_USER_CONFIGURATION_DIR"      : "config.user.d",
-		"_remove_me_to_set_USER_TIME_ZONE"              : "Australia\/Sydney"
+		"_remove_me_to_set_USER_CONFIGURATION_DIR"      : "config.user.d"
+		
 	},
 
 	"badges": {
@@ -71,8 +71,8 @@
 		"syslog": {
 			"display" : "Syslog",
 			"path"    : "/var/log/net/syslog.log",
-			"refresh" : 20,
-			"max"     : 20,
+			"refresh" : 5,
+			"max"     : 100,
 			"notify"  : false,
 			"format"  : {
 				"regex": "|([0-9]{1,2}-.*-[0-9]{1,4} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,3}) (.*?) (.*?) (.*?)$|",
