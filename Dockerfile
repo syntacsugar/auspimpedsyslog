@@ -14,7 +14,7 @@ RUN rm -rf /var/www && git clone https://github.com/potsky/PimpMyLog.git /var/ww
 RUN sed -i -e 's/;daemonize\ =\ yes/daemonize\ =\ no/' /etc/php/7.2/fpm/php-fpm.conf
 
 RUN sed -i 's/variables_order\ =\ "GPCS"/variables_order\ =\ \"GPCSE\"'/ /etc/php/7.2/cli/php.ini
-
+RUN sed -i 's/;date.timezone\ =/date.timezone\ =\ Australia\/Sydney/' /etc/php/7.2/cli/php.ini             
 RUN sed -i -e 's/#module(load="imudp")/module(load="imudp")/' -e 's/#input(type="imudp"\ port="514")/input(type="imudp"\ port="514")/' /etc/rsyslog.conf
 
 RUN mkdir -p /var/log/net/ && touch /var/log/net/syslog.log && ln -s /var/log/net/syslog.log /var/www/
@@ -23,7 +23,7 @@ RUN adduser www-data adm
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY config.user.php /var/www/cfg/pimpmylog.config.php
+COPY config.user.php /var/www/config.user.php
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 COPY run.sh /
