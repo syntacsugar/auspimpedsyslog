@@ -81,7 +81,7 @@
 					"Time"    : 1,
 					"IP"  	  : 2,
 					"Log Level"   : 3,
-					"Message" : 4
+					"Message" : 0
 				},
 				"types": {
 					"Date"    : "date:d:M:Y",
