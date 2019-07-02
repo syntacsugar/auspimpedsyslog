@@ -27,7 +27,7 @@ COPY config.user.php /var/www/config.user.php
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 COPY run.sh /
-RUN htpasswd -c -b /etc/nginx/.htpasswd $SYSLOG_USERNAME $SYSLOG_PASSWORD
+RUN htpasswd -c -b /etc/nginx/.htpasswd sysadmin syspassword
 
 RUN chmod u+x run.sh
 

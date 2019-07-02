@@ -5,10 +5,10 @@ include 'inc/classes/Sentinel.php';
 
 Sentinel::init();
 Sentinel::create();
-$username = $_ENV['SYSLOG_USERNAME'];
-$password = $_ENV['SYSLOG_PASSWORD'];
+$username = 'sysadmin';
+$password = 'syspassword';
 
-echo "Creating user with credentials: $username:$password\n";
+echo "Creating user with credentials: sysadmin:syspassword\n";
 
 Sentinel::setAdmin($username,$password);
 Sentinel::save();
