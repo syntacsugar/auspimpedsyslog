@@ -28,13 +28,9 @@ COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 COPY run.sh /
 RUN htpasswd -c -b /etc/nginx/.htpasswd sysadmin syspassword
-
 RUN chmod u+x run.sh
-
 RUN cd /var/www && php7.2 -f create-user.php && chown www-data:www-data config.auth.user.php && rm -f create-user.php 
-
-
-service php7.2-fpm start
-service supervisor start
 #EXPOSE 80 514/udp
+CMD ["service","php7.2-fpm","start"]
+CMD ["service","supervisor","start"]
 CMD ["/usr/sbin/nginx","-c","/etc/nginx/nginx.conf"]
