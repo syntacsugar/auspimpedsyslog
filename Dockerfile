@@ -7,7 +7,7 @@ ENV TZ=Australia/Sydney
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
-    && apt-get install -y git net-tools vim nginx rsyslog supervisor php7.2-fpm php7.2-cli apache2-utils\
+    && apt-get install -y git net-tools vim nginx rsyslog php7.2-fpm php7.2-cli apache2-utils\
     && rm -rf /var/lib/apt/lists/* \
 
 RUN rm -rf /var/www && git clone https://github.com/potsky/PimpMyLog.git /var/www
@@ -22,7 +22,6 @@ RUN chown -R syslog:adm /var/log/net/
 RUN adduser www-data adm
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY config.user.php /var/www/config.user.php
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
@@ -32,5 +31,5 @@ RUN chmod u+x run.sh
 RUN cd /var/www && php7.2 -f create-user.php && chown www-data:www-data config.auth.user.php && rm -f create-user.php 
 #EXPOSE 80 514/udp
 CMD ["service","php7.2-fpm","start"]
-CMD ["service","supervisor","start"]
+CMD ["service","rsyslog","start"]
 CMD ["/usr/sbin/nginx","-c","/etc/nginx/nginx.conf"]
