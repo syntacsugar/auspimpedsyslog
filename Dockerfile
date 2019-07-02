@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
     && apt-get install -y git net-tools vim nginx rsyslog supervisor php7.2-fpm php7.2-cli apache2-utils\
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
 
 RUN rm -rf /var/www && git clone https://github.com/potsky/PimpMyLog.git /var/www
 RUN sed -i -e 's/;daemonize\ =\ yes/daemonize\ =\ no/' /etc/php/7.2/fpm/php-fpm.conf
