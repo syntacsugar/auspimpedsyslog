@@ -33,7 +33,11 @@ RUN chmod u+x run.sh
 
 RUN cd /var/www && php7.2 -f create-user.php && chown www-data:www-data config.auth.user.php && rm -f create-user.php 
 
+
+service php7.2-fpm start
+service supervisor start
 #EXPOSE 80 514/udp
 CMD ["/run.sh"]
+/usr/sbin/nginx -c /etc/nginx/nginx.conf
 
 
