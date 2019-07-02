@@ -16,3 +16,4 @@ chown www-data:www-data config.auth.user.php
 cd
 service php7.2-fpm start
 service supervisor start
+sleep 9999

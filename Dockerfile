@@ -31,7 +31,7 @@ RUN chmod u+x run.sh
 
 #RUN cd /var/www && php7.2 -f ./create-user.php && chown www-data:www-data config.auth.user.php 
 
-EXPOSE 80 514/udp
+#EXPOSE 80 514/udp
 CMD ["/run.sh"]
 
 
