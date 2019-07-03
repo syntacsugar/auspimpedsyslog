@@ -29,5 +29,5 @@ COPY create-user.php /var/www/
 RUN htpasswd -c -b /etc/nginx/.htpasswd sysadmin syspassword
 RUN cd /var/www && php7.2 -f create-user.php && chown www-data:www-data config.auth.user.php && rm -f create-user.php 
 #EXPOSE 80 514/udp
-CMD ["service","supervisor","start"]
-CMD ["sleep","9999"]
+
+CMD ["service","php7.2-fpm","start","&&","service","supervisor","start"]
