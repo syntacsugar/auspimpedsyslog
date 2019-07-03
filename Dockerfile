@@ -27,7 +27,6 @@ COPY config.user.php /var/www/config.user.php
 COPY rsyslog.conf /etc/rsyslog.conf
 COPY create-user.php /var/www/
 RUN htpasswd -c -b /etc/nginx/.htpasswd sysadmin syspassword
-RUN chmod u+x run.sh
 RUN cd /var/www && php7.2 -f create-user.php && chown www-data:www-data config.auth.user.php && rm -f create-user.php 
 #EXPOSE 80 514/udp
 CMD ["service","supervisor","start"]
